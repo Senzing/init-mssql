@@ -730,8 +730,10 @@ def get_db_parameters(database_url):
 def process_sql_file(input_url, db_parameters):
     ''' Read an SQL file line-by-line and do a database execute on each line. '''
 
-    db_connection_string = "DRIVER={ODBC Driver 18 for SQL Server};SERVER={host};DATABASE={database};UID={user};PWD={password}".format(**db_parameters)
-    db_connection = pyodbc.connect("DRIVER={ODBC Driver 18 for SQL Server};SERVER={host};DATABASE={database};UID={user};PWD={password}".format(**db_parameters))
+    db_connection_string = "DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={host};DATABASE={database};UID={user};PWD={password}".format(**db_parameters)
+    logging.error(message_error(999, "db_connection_string: {0}".format(db_connection_string)))
+
+    db_connection = pyodbc.connect(db_connection_string)
     db_connection.autocommit = True
 
     if input_url:

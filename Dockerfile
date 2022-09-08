@@ -54,7 +54,6 @@ COPY ./init-mssql.py /app/
 # Set environment variables.
 
 ENV LD_LIBRARY_PATH=/opt/senzing/g2/lib:/opt/senzing/g2/lib/debian
-ENV ODBCSYSINI=/etc/opt/senzing
 ENV PATH=${PATH}:/opt/senzing/g2/python
 ENV PYTHONPATH=/opt/senzing/g2/sdk/python
 ENV SENZING_DOCKER_LAUNCHED=true
