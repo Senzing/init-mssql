@@ -46,7 +46,7 @@ services:
     restart: on-failure
 
   init-mssql:
-    container_name: senzing-init-mysql
+    container_name: senzing-init-mssql
     depends_on:
       - mssql
     environment:
@@ -63,10 +63,10 @@ services:
 #         },
 #         "SQL": {
 #           "BACKEND": "SQL",
-#           "CONNECTION": "mssql://${MYSQL_USERNAME:-g2}:${MYSQL_PASSWORD:-g2}@${MYSQL_HOST:-senzing-mysql}:${MYSQL_PORT:-3306}/?schema=${MYSQL_DATABASE:-G2}"
+#           "CONNECTION": "mssql://${MSSQL_USERNAME:-g2}:${MSSQL_SA_PASSWORD:-g2}@${MSSQL_HOST:-senzing-mssql}:${MSSQL_PORT:-3306}/?schema=${MSSQL_DATABASE:-G2}"
 #         }
 #       }
-#     SENZING_INPUT_SQL_URL: "file:///opt/senzing/g2/resources/schema/g2core-schema-mysql-create.sql"
+#     SENZING_INPUT_SQL_URL: "file:///opt/senzing/g2/resources/schema/g2core-schema-mssql-create.sql"
       SENZING_SUBCOMMAND: mandatory
     image: senzing/init-mssql:${SENZING_DOCKER_IMAGE_VERSION_INIT_MSSQL:-latest}
     networks:
