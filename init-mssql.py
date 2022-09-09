@@ -257,6 +257,7 @@ MESSAGE_DICTIONARY = {
     "699": "{0}",
     "700": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}E",
     "701": "Missing required parameter: {0}",
+    "702": "SQL.execute error: {0}",
     "730": "There are not enough safe characters to do the translation. Unsafe Characters: {0}; Safe Characters: {1}",
     "896": "Could not initialize G2ConfigMgr with '{0}'. Error: {1}",
     "897": "Could not initialize G2Config with '{0}'. Error: {1}",
@@ -686,11 +687,6 @@ def get_db_parameters(database_url):
     ''' Tokenize a database URL. '''
 
     parsed_database_url = parse_database_url(database_url)
-
-    # logging.error(message_error(999, "parsed_database_url: {0}".format(parsed_database_url)))
-    # dbname = parsed_database_url.get('path')[1:]
-    # logging.error(message_error(999, "dbname: {0}".format(dbname)))
-
     result = {
         'database': parsed_database_url.get('schema', ""),
         'user': parsed_database_url.get('username', ""),
@@ -705,8 +701,6 @@ def process_sql_file(input_url, db_parameters):
     ''' Read an SQL file line-by-line and do a database execute on each line. '''
 
     db_connection_string = "DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={host};DATABASE={database};UID={user};PWD={password};TrustServerCertificate=yes;".format(**db_parameters)
-    logging.error(message_error(999, "db_connection_string: {0}".format(db_connection_string)))
-
     db_connection = pyodbc.connect(db_connection_string)
     db_connection.autocommit = True
 
@@ -721,9 +715,9 @@ def process_sql_file(input_url, db_parameters):
                         db_cursor.close()
                     except (pyodbc.ProgrammingError, pyodbc.IntegrityError) as error:
                         err_message = ' '.join(str(error).split())
-                        logging.error(message_error(999, err_message))
+                        logging.error(message_error(702, err_message))
                     except Exception as error:
-                        logging.error(message_error(999, "{0} - {1}".format(type(error), ' '.join(str(error).split()))))
+                        logging.error(message_error(702, "{0} - {1}".format(type(error), ' '.join(str(error).split()))))
 
     if db_connection is not None:
         db_connection.close()
