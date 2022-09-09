@@ -36,7 +36,7 @@ from senzing import G2Config, G2ConfigMgr, G2ModuleException
 __all__ = []
 __version__ = "1.0.0"  # See https://www.python.org/dev/peps/pep-0396/
 __date__ = '2022-09-08'
-__updated__ = '2022-09-08'
+__updated__ = '2022-09-09'
 
 # See https://github.com/Senzing/knowledge-base/blob/main/lists/senzing-product-ids.md
 
@@ -730,7 +730,7 @@ def get_db_parameters(database_url):
 def process_sql_file(input_url, db_parameters):
     ''' Read an SQL file line-by-line and do a database execute on each line. '''
 
-    db_connection_string = "DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={host};DATABASE={database};UID={user};PWD={password}".format(**db_parameters)
+    db_connection_string = "DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={host};DATABASE={database};UID={user};PWD={password};TrustServerCertificate=yes;".format(**db_parameters)
     logging.error(message_error(999, "db_connection_string: {0}".format(db_connection_string)))
 
     db_connection = pyodbc.connect(db_connection_string)
@@ -745,7 +745,7 @@ def process_sql_file(input_url, db_parameters):
                         db_cursor = db_connection.cursor()
                         db_cursor.execute(line_string)
                         db_cursor.close()
-                    except (mysql.connector.errors.ProgrammingError, mysql.connector.errors.IntegrityError) as error:
+                    except (pyodbc.ProgrammingError, pyodbc.IntegrityError) as error:
                         err_message = ' '.join(str(error).split())
                         logging.error(message_error(999, err_message))
                     except Exception as error:
