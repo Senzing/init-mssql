@@ -68,7 +68,7 @@ services:
 #       }
 #     SENZING_INPUT_SQL_URL: "file:///opt/senzing/g2/resources/schema/g2core-schema-mysql-create.sql"
       SENZING_SUBCOMMAND: mandatory
-    image: senzing/init-mssql:${SENZING_DOCKER_IMAGE_VERSION_INIT_MYSQL:-latest}
+    image: senzing/init-mssql:${SENZING_DOCKER_IMAGE_VERSION_INIT_MSSQL:-latest}
     networks:
       - senzing
     read_only: true
