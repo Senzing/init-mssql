@@ -702,6 +702,7 @@ Server = {hostname},{port}
 """
     return 0
 
+
 def create_senzing_database_connection_string(database_url):
     '''Transform PostgreSQL URL to a format Senzing understands.'''
     parsed_database_url = parse_database_url(database_url)
