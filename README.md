@@ -17,11 +17,9 @@ To see all of the subcommands, run:
 
 ```console
 $ ./init-mssql.py
-2022-09-09 14:39:12,862 senzing-50320696W Bad SENZING_SUBCOMMAND: all.
 usage: init-mssql.py [-h] {mandatory,sleep,version,docker-acceptance-test} ...
 
-Add description. For more information, see https://github.com/Senzing/init-
-mssql
+Add description. For more information, see https://github.com/Senzing/init-mssql
 
 positional arguments:
   {mandatory,sleep,version,docker-acceptance-test}
@@ -34,7 +32,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-
 ```
 
 ### Contents
