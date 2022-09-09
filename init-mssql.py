@@ -238,19 +238,8 @@ MESSAGE_DEBUG = 900
 
 MESSAGE_DICTIONARY = {
     "100": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}I",
-    "163": "{0} - Configuring for Senzing database cluster based on SENZING_ENGINE_CONFIGURATION_JSON",
     "170": "Created new default config in SYS_CFG having ID {0}",
     "171": "Default config in SYS_CFG already exists having ID {0}",
-    "180": "{0} - Postgresql detected.  Installing governor from {1}",
-    "181": "{0} - Postgresql detected. Using existing governor; no change.",
-    "182": "Initializing for SQLite",
-    "183": "Initializing for Db2",
-    "184": "Initializing for MS SQL",
-    "185": "Initializing for MySQL",
-    "186": "Initializing for PostgreSQL",
-    "187": "{0} - Directory does not exist; no change.",
-    "188": "{0} - Cannot write to read-only filesystem; no change.",
-    "292": "Configuration change detected.  Old: {0} New: {1}",
     "293": "For information on warnings and errors, see https://github.com/Senzing/stream-loader#errors",
     "294": "Version: {0}  Updated: {1}",
     "295": "Sleeping infinitely.",
@@ -259,20 +248,16 @@ MESSAGE_DICTIONARY = {
     "298": "Exit {0}",
     "299": "{0}",
     "300": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}W",
-    "301": "Could not download the senzing postgresql governor from {0}. Ignore this on air gapped systems. Exception details: {1}",
     "499": "{0}",
     "500": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}E",
-    "510": "{0} - File is missing.",
-    "695": "Unknown database scheme '{0}' in database url '{1}'",
+    "568": "Original and new database URLs do not match. Original URL: {0}; Reconstructed URL: {1}",
     "696": "Bad SENZING_SUBCOMMAND: {0}.",
     "697": "No processing done.",
     "698": "Program terminated with error.",
     "699": "{0}",
     "700": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}E",
     "701": "Missing required parameter: {0}",
-    "879": "Senzing SDK was not imported.",
-    "885": "License has expired.",
-    "891": "Original and new database URLs do not match. Original URL: {0}; Reconstructed URL: {1}",
+    "730": "There are not enough safe characters to do the translation. Unsafe Characters: {0}; Safe Characters: {1}",
     "896": "Could not initialize G2ConfigMgr with '{0}'. Error: {1}",
     "897": "Could not initialize G2Config with '{0}'. Error: {1}",
     "899": "{0}",
@@ -690,18 +675,6 @@ def parse_database_url(original_senzing_database_url):
 # Utility functions
 # -----------------------------------------------------------------------------
 
-# The following method is just a docstring for use in creating a template file.
-
-
-def database_initialization_mssql_odbc_ini_mssql_template():
-    """[{schema}]
-Database = G2
-Description = Senzing MS SQL database for G2
-Driver = ODBC Driver 17 for SQL Server
-Server = {hostname},{port}
-"""
-    return 0
-
 
 def create_senzing_database_connection_string(database_url):
     '''Transform PostgreSQL URL to a format Senzing understands.'''
@@ -771,6 +744,8 @@ def create_database_url(senzing_database_connection_string):
 
 def get_g2_configuration_dictionary(config):
     ''' Construct a dictionary in the form of the old ini files. '''
+
+    # TODO: Awaiting GDEV-3489.
 
     result = {
         "PIPELINE": {
