@@ -91,8 +91,8 @@ describing where we can improve.   Now on with the show...
 
     ```console
     export DATABASE_PROTOCOL=mssql
-    export DATABASE_USERNAME=g2
-    export DATABASE_PASSWORD=g2
+    export DATABASE_USERNAME=username
+    export DATABASE_PASSWORD=password
     export DATABASE_HOST=example.com
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
