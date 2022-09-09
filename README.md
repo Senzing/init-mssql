@@ -1,25 +1,27 @@
-# init-mysql
+# init-mssql
 
 ## Synopsis
 
-Initializes a MySQL database for use with Senzing.
+Initializes a MS SQL database for use with Senzing.
 
 ## Overview
 
-The [init-mysql.py](init-mysql.py) python script is a "run-to-completion" job
-that initializes an MySQL database for use with Senzing.
+The [init-mssql.py](init-mssql.py) python script is a "run-to-completion" job
+that initializes an MS SQL database for use with Senzing.
 It create the Senzing database schema
 and populates the database with an initial Senzing configuration.
 
-The `senzing/init-mysql` Docker image is a wrapper for use in Docker formations (e.g. docker-compose, kubernetes).
+The `senzing/init-mssql` Docker image is a wrapper for use in Docker formations (e.g. docker-compose, kubernetes).
 
 To see all of the subcommands, run:
 
 ```console
-$ ./init-mysql.py
-usage: init-mysql.py [-h] {mandatory,sleep,version,docker-acceptance-test} ...
+$ ./init-mssql.py
+2022-09-09 14:39:12,862 senzing-50320696W Bad SENZING_SUBCOMMAND: all.
+usage: init-mssql.py [-h] {mandatory,sleep,version,docker-acceptance-test} ...
 
-Add description. For more information, see https://github.com/Senzing/init-mysql
+Add description. For more information, see https://github.com/Senzing/init-
+mssql
 
 positional arguments:
   {mandatory,sleep,version,docker-acceptance-test}
@@ -32,6 +34,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+
 ```
 
 ### Contents
@@ -74,8 +77,8 @@ describing where we can improve.   Now on with the show...
 
 ## Related artifacts
 
-1. [DockerHub](https://hub.docker.com/r/senzing/init-mysql)
-1. [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-init-mysql)
+1. [DockerHub](https://hub.docker.com/r/senzing/init-mssql)
+1. [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-init-mssql)
 
 ## Expectations
 
@@ -90,7 +93,7 @@ describing where we can improve.   Now on with the show...
    Example:
 
     ```console
-    export DATABASE_PROTOCOL=mysql
+    export DATABASE_PROTOCOL=mssql
     export DATABASE_USERNAME=g2
     export DATABASE_PASSWORD=g2
     export DATABASE_HOST=example.com
@@ -122,7 +125,7 @@ describing where we can improve.   Now on with the show...
     sudo --preserve-env docker run \
       --env SENZING_DATABASE_URL \
       --rm \
-      senzing/init-mysql mandatory
+      senzing/init-mssql mandatory
     ```
 
 ## Demonstrate using docker-compose
@@ -145,14 +148,14 @@ describing where we can improve.   Now on with the show...
    Example:
 
     ```console
-    export MYSQL_DIR=${SENZING_VOLUME}/mysql
+    export MSSQL_DIR=${SENZING_VOLUME}/mssql
     ```
 
 1. Create directories.
    Example:
 
     ```console
-    mkdir -p ${MYSQL_DIR}
+    mkdir -p ${MSSQL_DIR}
     ```
 
 1. Get stable versions of Docker images.
@@ -171,7 +174,7 @@ describing where we can improve.   Now on with the show...
     ```console
     curl -X GET \
         --output ${SENZING_VOLUME}/docker-compose.yaml \
-        "https://raw.githubusercontent.com/Senzing/init-mysql/main/docker-compose.yaml"
+        "https://raw.githubusercontent.com/Senzing/init-mssql/main/docker-compose.yaml"
     cd ${SENZING_VOLUME}
     sudo --preserve-env docker-compose pull
     ```
@@ -211,7 +214,7 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/
 
     ```console
     export GIT_ACCOUNT=senzing
-    export GIT_REPOSITORY=init-mysql
+    export GIT_REPOSITORY=init-mssql
     export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
     export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
     ```
@@ -224,15 +227,15 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/
 
     ```console
     sudo docker build \
-      --tag senzing/init-mysql \
-      https://github.com/senzing/init-mysql.git#main
+      --tag senzing/init-mssql \
+      https://github.com/senzing/init-mssql.git#main
     ```
 
 1. **Option #2:** Using `docker` command and local repository.
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
-    sudo docker build --tag senzing/init-mysql .
+    sudo docker build --tag senzing/init-mssql .
     ```
 
 1. **Option #3:** Using `make` command.
