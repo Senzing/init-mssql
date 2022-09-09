@@ -778,6 +778,7 @@ def get_g2_configuration_dictionary(config):
             "SUPPORTPATH": config.get("data_dir"),
         },
         "SQL": {
+            "BACKEND": "SQL",
             "CONNECTION": create_senzing_database_connection_string(config.get('database_url')),
         }
     }
