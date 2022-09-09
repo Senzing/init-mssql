@@ -132,27 +132,8 @@ describing where we can improve.   Now on with the show...
 
     ```console
     export SENZING_VOLUME=~/my-senzing
-    ```
+    mkdir -p ${SENZING_VOLUME}
 
-    1. :warning:
-       **macOS** - [File sharing](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/share-directories-with-docker.md#macos)
-       must be enabled for `SENZING_VOLUME`.
-    1. :warning:
-       **Windows** - [File sharing](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/share-directories-with-docker.md#windows)
-       must be enabled for `SENZING_VOLUME`.
-
-1. Set environment variables.
-   Example:
-
-    ```console
-    export MSSQL_DIR=${SENZING_VOLUME}/mssql
-    ```
-
-1. Create directories.
-   Example:
-
-    ```console
-    mkdir -p ${MSSQL_DIR}
     ```
 
 1. Get stable versions of Docker images.
